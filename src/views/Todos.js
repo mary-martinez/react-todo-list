@@ -13,18 +13,11 @@ export default function Todos() {
     fetchData();
   }, []);
 
-  // const handleCheckOff = async() => {
-  //   const resp = await checkOffItem(id);
-  // }
+
 
   return (
     <div>
-      {todos.map((todo) => (
-        <div key={todo.id}>
-          <TodoItem todo={todo} />
-        </div>
-      )
-      )}
+      <TodoItem todos={todos} setTodos={setTodos} />
     </div>
   );
 }
