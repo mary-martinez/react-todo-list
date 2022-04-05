@@ -7,6 +7,10 @@ export async function fetchTodos() {
 
 export async function checkOffItem(status, id) {
   const resp = await client.from('todos').update({ complete: status }).match({ id });
-  // console.log(resp);
+  return checkError(resp);
+}
+
+export async function addNewTodo(todo) {
+  const resp = await client.from('todos').insert({ todo: todo });
   return checkError(resp);
 }
