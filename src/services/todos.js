@@ -14,3 +14,8 @@ export async function addNewTodo(todo) {
   const resp = await client.from('todos').insert({ todo: todo });
   return checkError(resp);
 }
+
+export async function deleteItem(id) {
+  const resp = await client.from('todos').delete().match({ id });
+  return checkError(resp);
+}

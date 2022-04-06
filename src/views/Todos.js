@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AddTask from '../components/AddTask';
 import TodoItem from '../components/TodoItem';
 import { addNewTodo, fetchTodos } from '../services/todos';
+import './Todos.css';
 
 export default function Todos() {
   const [todos, setTodos] = useState([]);
@@ -30,9 +31,10 @@ export default function Todos() {
 
 
   return (
-    <div>
+    <div className='todo-page'>
       {error && <p>{error}</p>}
-      <h1>Your Tasks:</h1>
+      <h1>Your Tasks</h1>
+      <p>Click an item to toggle complete/incomplete.</p>
       <AddTask {...{ newTask, setNewTask, handleNewTask }} />
       <TodoItem todos={todos} setTodos={setTodos} />
     </div>

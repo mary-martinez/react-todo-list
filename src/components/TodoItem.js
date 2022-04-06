@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { checkOffItem, fetchTodos } from '../services/todos';
+import { checkOffItem, deleteItem, fetchTodos } from '../services/todos';
 import './TodoItem.css';
 
 export default function TodoItems({ todos, setTodos }) {
@@ -16,12 +16,23 @@ export default function TodoItems({ todos, setTodos }) {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await deleteItem(id);
+      const updated = await fetchTodos();
+      setTodos(updated);
+    } catch (e) {
+      setError(e.message);
+    }
+  };
+
   return (
-    <div>
+    <div className='todo-list'>
       {error && <h3>{error}</h3>}
       {todos.map((todo) => (
-        <div key={todo.id} >
+        <div key={todo.id} className='todo-item'>
           <h3 className={`complete-${todo.complete}`} onClick={() => handleCheckOff(!todo.complete, todo.id)} >{todo.todo}</h3>
+          <button onClick={() => handleDelete(todo.id)}>Delete</button>
         </div>
       )
       )}
